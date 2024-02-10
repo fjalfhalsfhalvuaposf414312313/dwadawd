@@ -3599,7 +3599,7 @@ CreateTargetAbility(":Stab",function()
     if TARGET then
         Stop()
         noclip = true
-        Buy('[Pitchfork] - $339','[Pitchfork]')
+        Buy('[Pitchfork]','339','[Pitchfork]')
         Hit2()
         PitchStab = true
     end
@@ -3609,7 +3609,7 @@ CreateTargetAbility(":Astab",function()
     if TARGET then
         Stop()
         noclip = true
-        Buy('[Pitchfork] - $339','[Pitchfork]')
+        Buy('[Pitchfork]','339','[Pitchfork]')
         Hit2()
         PitchKills = true
     end
@@ -3619,7 +3619,7 @@ CreateTargetAbility(":Kannoy",function()
     if TARGET then
         Stop()
         noclip = true
-        Buy('[Pitchfork] - $339','[Pitchfork]')
+        Buy('[Pitchfork]','339','[Pitchfork]')
         Hit2()
         PitchAnnoy = true
     end
