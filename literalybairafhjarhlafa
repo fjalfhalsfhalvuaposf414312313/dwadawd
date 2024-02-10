@@ -2373,7 +2373,7 @@ end)
 
 Create('Pitch!',function()
     Stop()
-    Buy('[Pitchfork] - $339','[Pitchfork]')
+    Buy('[Pitchfork]','339','[Pitchfork]')
 end)
 
 Create('Sign!',function()
