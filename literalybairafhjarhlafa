@@ -281,20 +281,6 @@ function GripPos(Y)
     STAND.Character:FindFirstChild("Humanoid"):EquipTool(LastObject)
 end
 
-function Buy(Item,Price,ItemName)
-    repeat rs.Stepped:Wait()
-        for i,v in pairs(STAND.Character:GetDescendants()) do
-            if v:IsA("BasePart") or v:IsA("MeshPart") or v:IsA("Part") then
-                v.CanCollide = false
-            end
-        end
-        game.Workspace.Camera.CameraSubject = game.Workspace.Ignored.Shop[Item.." - $"..Price].Head
-        getRoot(STAND).CFrame=game.Workspace.Ignored.Shop[Item.." - $"..Price].Head.CFrame*CFrame.new(0,-5,0)
-        fireclickdetector(game.Workspace.Ignored.Shop[Item.." - $"..Price].ClickDetector)
-    until STAND.Backpack:FindFirstChild(ItemName)
-    game.Workspace.Camera.CameraSubject = getHumanoid(STAND)
-end
-
 function Align(P0, P1, P, R)
     local A0, A1 = Instance.new("Attachment", P0), Instance.new("Attachment", P1)
     
@@ -1184,6 +1170,16 @@ function BuyKnife()
         fireclickdetector(game.Workspace.Ignored.Shop['[Knife] - $155'].ClickDetector)
     until STAND.Backpack:FindFirstChild("[Knife]")
     STAND.Backpack:FindFirstChild('[Knife]').Parent = STAND.Character
+end
+
+function BuyPitch()
+    noclip = true
+    repeat Wait()
+        getRoot(STAND).CFrame = game.Workspace.Ignored.Shop['[Pitchfork] - $339'].Head.CFrame*CFrame.new(0,-5,0)
+        fireclickdetector(game.Workspace.Ignored.Shop['[Pitchfork] - $339'].ClickDetector)
+    until STAND.Backpack:FindFirstChild("[Pitchfork]")
+    STAND.Backpack:FindFirstChild('[Pitchfork]').Parent = STAND.Character
+    Summon()
 end
 
 function BuySign()
@@ -2373,7 +2369,7 @@ end)
 
 Create('Pitch!',function()
     Stop()
-    Buy('[Pitchfork]','339','[Pitchfork]')
+    BuyPitch()
 end)
 
 Create('Sign!',function()
@@ -3599,7 +3595,7 @@ CreateTargetAbility(":Stab",function()
     if TARGET then
         Stop()
         noclip = true
-        Buy('[Pitchfork]','339','[Pitchfork]')
+        BuyPitch()
         Hit2()
         PitchStab = true
     end
@@ -3609,7 +3605,7 @@ CreateTargetAbility(":Astab",function()
     if TARGET then
         Stop()
         noclip = true
-        Buy('[Pitchfork]','339','[Pitchfork]')
+        BuyPitch()
         Hit2()
         PitchKills = true
     end
@@ -3619,7 +3615,7 @@ CreateTargetAbility(":Kannoy",function()
     if TARGET then
         Stop()
         noclip = true
-        Buy('[Pitchfork]','339','[Pitchfork]')
+        BuyPitch()
         Hit2()
         PitchAnnoy = true
     end
