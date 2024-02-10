@@ -1840,6 +1840,12 @@ OWNER.Chatted:Connect(function(msg)
     end
 end)
 
+OWNER.Chatted:Connect(function(msg)
+    if msg == ('/e cm') then
+    game.ReplicatedStorage.MainEvent:FireServer("PhoneCall",OWNER.Name)
+    end
+end)
+
 Create("Desummon!",function()
     Vanish()
 end)
@@ -3839,9 +3845,6 @@ commands.e = function(arguments)
             noclip = true
             Knocked = true
             Viewing = true
-        end
-    elseif CMD == 'cm' then
-        game.ReplicatedStorage.MainEvent:FireServer("PhoneCall",OWNER.Name)
         end
     elseif CMD == 't2' then
         TARGET = gplr(arguments[2])
