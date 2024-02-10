@@ -1816,6 +1816,12 @@ Create('Summon3!',function()
 end)
 
 OWNER.Chatted:Connect(function(msg)
+    if msg == ('/e cm') then
+        game.ReplicatedStorage.MainEvent:FireServer("PhoneCall",OWNER.Name)
+    end
+end)
+
+OWNER.Chatted:Connect(function(msg)
     if msg == ('/e q') then
         SummonAudio()
         Summon()
