@@ -3593,9 +3593,9 @@ end)
 
 CreateTargetAbility(":Stab",function()
     if TARGET then
+        BuyPitch()
         Stop()
         noclip = true
-        BuyPitch()
         Hit2()
         PitchStab = true
     end
@@ -3603,9 +3603,9 @@ end)
 
 CreateTargetAbility(":Astab",function()
     if TARGET then
+        BuyPitch()
         Stop()
         noclip = true
-        BuyPitch()
         Hit2()
         PitchKills = true
     end
@@ -3613,9 +3613,9 @@ end)
 
 CreateTargetAbility(":Kannoy",function()
     if TARGET then
+        BuyPitch()
         Stop()
         noclip = true
-        BuyPitch()
         Hit2()
         PitchAnnoy = true
     end
