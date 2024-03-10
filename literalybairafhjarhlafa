@@ -458,16 +458,15 @@ function TargetMalee(TARGET)
 end
 
 function TargetPitch(TARGET)
-        for _,v in ipairs(STAND.Character:WaitForChild("Humanoid"):GetPlayingAnimationTracks()) do v:Stop() end
-        if game.Workspace.Vehicles:FindFirstChild(TARGET.Name) then
-            getRoot(STAND).CFrame = CFrame.new(game.Workspace.Vehicles[TARGET.Name].Position)*CFrame.new(game.Workspace.Vehicles[TARGET.Name].Velocity*.4)*CFrame.new(0,0,0)
+    rs.heartbeat:wait()
+    for _,v in ipairs(STAND.Character:WaitForChild("Humanoid"):GetPlayingAnimationTracks()) do v:Stop() end
+    if game.Workspace.Vehicles:FindFirstChild(TARGET.Name) then
+        getRoot(STAND).CFrame = CFrame.new(game.Workspace.Vehicles[TARGET.Name].Position)*CFrame.new(game.Workspace.Vehicles[TARGET.Name].Velocity*.4)*CFrame.new(0,0,0)
+    else
+        if resolve == true then
+            getRoot(STAND).CFrame = CFrame.new(getRoot(TARGET).Position + Vector3.new(0,UnderP,0) + (getHumanoid(TARGET).MoveDirection*Prediction*getHumanoid(TARGET).WalkSpeed))*CFrame.Angles(math.pi*0.5,0,0)
         else
-            if resolve == true then
-                getRoot(STAND).CFrame = CFrame.new(getRoot(TARGET).Position + Vector3.new(0,UnderP,0) + (getHumanoid(TARGET).MoveDirection*Prediction*getHumanoid(TARGET).WalkSpeed))*CFrame.Angles(math.pi*0.5,0,0)
-            else
-                getRoot(STAND).CFrame = CFrame.new(getRoot(TARGET).Position.X+(getRoot(TARGET).Velocity.X*Prediction),getRoot(TARGET).Position.Y+(getRoot(TARGET).Velocity.Y*0),getRoot(TARGET).Position.Z+(getRoot(TARGET).Velocity.Z*Prediction))*CFrame.new(0,UnderP,0)*CFrame.Angles(math.pi*0.5,0,0)
-                end
-            end
+            getRoot(STAND).CFrame = CFrame.new(getRoot(TARGET).Position.X+(getRoot(TARGET).Velocity.X*Prediction),getRoot(TARGET).Position.Y+(getRoot(TARGET).Velocity.Y*0),getRoot(TARGET).Position.Z+(getRoot(TARGET).Velocity.Z*Prediction))*CFrame.new(0,UnderP,0)*CFrame.Angles(math.pi*0.5,0,0)
         end
     end	
     game.Workspace.Camera.CameraSubject = getRoot(TARGET)
@@ -695,8 +694,8 @@ function Bring(Target)
         Summon()
         end
         end
+
 function GetNearest()
-    rs.heartbeat:wait()
     local ClosestPlayer
     local ClosestDistance = math.huge
     for _,v in pairs(game.Players:GetPlayers()) do
@@ -736,7 +735,6 @@ function GetNearest()
 end
 
 function GetNearest2()
-    rs.heartbeat:wait()
     local ClosestPlayer
     local ClosestDistance = math.huge
     for _,v in pairs(game.Players:GetPlayers()) do
@@ -4814,3 +4812,18 @@ rs.Stepped:Connect(function()
 		end
 	end
 end)
+
+for i,v in pairs(game.Players:GetChildren()) do
+	v.Chatted:Connect(function(msg)
+		output(v, msg)
+	end)
+end
+
+game.Players.ChildAdded:Connect(function(plr)
+	if plr:IsA("Player") then
+		plr.Chatted:Connect(function(msg)
+			output(plr, msg)
+		end)
+	end
+end)
+end
