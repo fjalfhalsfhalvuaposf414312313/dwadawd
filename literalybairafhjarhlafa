@@ -411,11 +411,11 @@ function Gbring(TARGET)
 end
 
 function TargetMalee(TARGET)
+    rs.heartbeat:wait()
     q = getRoot(TARGET)
     w = TARGET.Character:FindFirstChild('Head')
     e = getHumanoid(TARGET)
     t = getRoot(STAND)
-    rs.heartbeat:wait()
     for _,v in ipairs(STAND.Character:WaitForChild("Humanoid"):GetPlayingAnimationTracks()) do v:Stop() end
     if game.Workspace.Vehicles:FindFirstChild(TARGET.Name) then
         t.CFrame = CFrame.new(game.Workspace.Vehicles[TARGET.Name].Position)*CFrame.new(game.Workspace.Vehicles[TARGET.Name].Velocity*.4)*CFrame.new(0,0,0)
