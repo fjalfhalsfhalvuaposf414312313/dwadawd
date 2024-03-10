@@ -2607,7 +2607,6 @@ Create("godmepls!",function()
 
 Create('Combat!',function()
     OWNER.Character.ChildAdded:Connect(function(a)
-        rs.heartbeat:wait()
         if a.Name == 'Combat' then
             a:Destroy()
             Stop()
