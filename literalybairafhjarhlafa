@@ -1,3 +1,37 @@
+getgenv().Credit = 'Lol' --Dont change this.
+
+getgenv().Owner = 'hatredframe' --Username of owners.
+
+getgenv().Settings = {
+    --// ! Main ! \\--
+    ['Position'] = 'Back', --Position Of Stand [Back | Left | Right]
+    ['CrewID'] = 32570691, --Must Be In Group For It To Work
+    ['Attack'] = 'Heavy', --Heavy = Super Punch Light = Spam Punch [Heavy | Light]
+    ['StandMode'] = 'Heaven', --[Star Platinum : OverHeaven | Star Platinum: The World | Star Platinum, Za Warudo! | TheWorld | Cmoon | King Crimson | Killer Queen | MIH | D4C]
+    ['FlyMode'] = 'Hover', --[Glide | Fly | Hover | Heaven]| gogo]
+    ['Prediction'] = 0.12595, --Prediction For Attack Or Targetting
+    ['GunPrediction'] = 0.12957, --Prediction For Gun Kill
+    ['AttackMode'] = 'Under', --[Sky | Under] If [Sky] The Stand Will Attack Infront Of Then And If [Under] The Stand Will Attack In Underground
+    ['GunMode'] = 'Sky', --[Sky | Under]  The Stand Will Shooting Just Like What In The Settings
+    ['Resolver'] = false, --[true | false] Turn On Or Off Resolver If Someone Using Anti Lock
+    --// ! Misc ! \\--
+    ['LowGraphics'] = true, --[true | false] Turns graphics down so your stand doesnt lag too much
+    
+    ['AntiStomp'] = false, --[true | false] The Stand Will Cannot Be Stomped Or Grabbed
+    ['CustomName'] = 'Master', --Custom Name Text Default Is [Master] Example Of it 'Im Here, Master!'
+    ['Hidescreen'] = false, --[true | false] If [true] You WIll See White Blank Screen But The Performance Is Gonna Be Good]
+    ['ChatCmds'] = true, --[true | false] Chatted When You Use Some Command
+    ['AutoMask'] = false, --[true | false] Auto Buy Mask When The Stand Respawn
+    ['FPSCAP'] = false, --[false | This is so your main account gets the most fps (MAXED IS 60, SUGGEST 30 FPS ON STANDS)
+    ['Msg'] = 'Yare Yare Daze.', --When You Say [/e msg] It Makes All The Alts Say That Message
+    ['Alt'] = false,
+    --//    ! Sounds !     \\--
+    --\\ MUST HAVE BOOMBOX //--
+    ['Sounds'] = false, --[true | false] Sounds when you use some commands like Mimic! Or Summon! The Stand And Etc
+    ['SummonMusic'] = false, --[true | false]
+    ['CustomSong'] = 8713037614 --Enter A Song ID And Say 'Song!'
+
+}
 if getgenv().Credit == 'Lol' then
 wait(0.1)
 if not game['Loaded'] or not game:GetService("Players").LocalPlayer then
@@ -377,12 +411,11 @@ function Gbring(TARGET)
 end
 
 function TargetMalee(TARGET)
-    pcall()
-    rs.heartbeat:wait()
     q = getRoot(TARGET)
     w = TARGET.Character:FindFirstChild('Head')
     e = getHumanoid(TARGET)
     t = getRoot(STAND)
+    rs.heartbeat:wait()
     for _,v in ipairs(STAND.Character:WaitForChild("Humanoid"):GetPlayingAnimationTracks()) do v:Stop() end
     if game.Workspace.Vehicles:FindFirstChild(TARGET.Name) then
         t.CFrame = CFrame.new(game.Workspace.Vehicles[TARGET.Name].Position)*CFrame.new(game.Workspace.Vehicles[TARGET.Name].Velocity*.4)*CFrame.new(0,0,0)
@@ -425,7 +458,6 @@ function TargetMalee(TARGET)
 end
 
 function TargetPitch(TARGET)
-    pcall()
     rs.heartbeat:wait()
     for _,v in ipairs(STAND.Character:WaitForChild("Humanoid"):GetPlayingAnimationTracks()) do v:Stop() end
     if game.Workspace.Vehicles:FindFirstChild(TARGET.Name) then
