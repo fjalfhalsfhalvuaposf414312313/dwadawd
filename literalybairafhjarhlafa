@@ -4813,18 +4813,3 @@ rs.Stepped:Connect(function()
 		end
 	end
 end)
-
-for i,v in pairs(game.Players:GetChildren()) do
-	v.Chatted:Connect(function(msg)
-		output(v, msg)
-	end)
-end
-
-game.Players.ChildAdded:Connect(function(plr)
-	if plr:IsA("Player") then
-		plr.Chatted:Connect(function(msg)
-			output(plr, msg)
-		end)
-	end
-end)
-end
