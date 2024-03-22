@@ -3072,7 +3072,7 @@ CreateTargetAbility("car!",function()
         wait(1)
         fireclickdetector(workspace.Ignored.Shop["[FoodsCart] - $16"].ClickDetector)
         wait(1)
-        rs.heartbeat:wait()
+        repeat rs.heartbeat:Wait()
             if game.players.LocalPlayer.character.Humanoid.Sit == false then
             getRoot(STAND).CFrame = CFrame.new(-897, 22, -613)
             wait(1)
@@ -3083,7 +3083,7 @@ CreateTargetAbility("car!",function()
         wait(2)
         getRoot(STAND).CFrame = CFrame.new(-897, 22, -612)
         wait(.1)
-        rs.heartbeat:wait()
+       repeat rs.heartbeat:Wait()
             if getHumanoid(TARGET).Sit == false then
                 getRoot(STAND).CFrame = getRoot(TARGET).CFrameCFrame.new(0,0,4)
                 Wheel(getRoot(TARGET).CFrameCFrame.new(0,0,3))
@@ -3093,10 +3093,10 @@ CreateTargetAbility("car!",function()
             end
         until getHumanoid(TARGET).Sit == true
         getRoot(STAND).CFrame = getRoot(OWNER).CFrameCFrame.new(0,5,0)
-        Wheel(getRoot(OWNER).CFrameCFrame.new(0,7,0))
-        Wheel(getRoot(OWNER).CFrameCFrame.new(0,7,0))
-        Wheel(getRoot(OWNER).CFrameCFrame.new(0,7,0))
-        Wheel(getRoot(OWNER).CFrameCFrame.new(0,7,0))
+        Wheel(getRoot(OWNER).CFrameCFrame.new(0,5,0))
+        Wheel(getRoot(OWNER).CFrameCFrame.new(0,5,0))
+        Wheel(getRoot(OWNER).CFrameCFrame.new(0,5,0))
+        Wheel(getRoot(OWNER).CFrameCFrame.new(0,5,0))
     end
 end)
 
