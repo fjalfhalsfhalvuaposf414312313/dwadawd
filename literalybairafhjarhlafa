@@ -281,26 +281,11 @@ function GripPos(Y)
     STAND.Character:FindFirstChild("Humanoid"):EquipTool(LastObject)
 end
 
-function Align(P0, P1, P, R)
-    local A0, A1 = Instance.new("Attachment", P0), Instance.new("Attachment", P1)
-    
-    local AP, AO = Instance.new("AlignPosition", P0), Instance.new("AlignOrientation", P0)
-    
-    A1.Position = P
-    A0.Rotation = R
-    
-    AP.RigidityEnabled = true
-    AP.Responsiveness = 200
-    AP.Attachment0 = A0
-    AP.Attachment1 = A1
-    
-    AO.MaxTorque = 9e9
-    AO.Responsiveness = 200
-    AO.RigidityEnabled = true
-    AO.Attachment0 = A0
-    AO.Attachment1 = A1
-    
-    return A0, A1, AP, A0
+function Wheel(CFRAME)
+    workspace.OldVehicles[game.Players.LocalPlayer.Name.."BIKE"].RBWheel.CFrame = CFRAME
+    workspace.OldVehicles[game.Players.LocalPlayer.Name.."BIKE"].RTWheel.CFrame = CFRAME
+    workspace.OldVehicles[game.Players.LocalPlayer.Name.."BIKE"].LTWheel.CFrame = CFRAME
+    workspace.OldVehicles[game.Players.LocalPlayer.Name.."BIKE"].LBWheel.CFrame = CFRAME
 end
 
 function Fire(Gun,Activate)
@@ -2843,6 +2828,41 @@ end)
 OWNER.Chatted:Connect(function(msg)
     if msg == ('/e cm') then
     MainEvent:FireServer("PhoneCall",OWNER.Name)
+    end
+end)
+
+CreateTargetAbility("car!",function()
+    if TARGET then
+        Stop()
+        getRoot(STAND).CFrame = CFrame.new(-897, 21, -611)
+        wait(1)
+        fireclickdetector(workspace.Ignored.Shop["[FoodsCart] - $16"].ClickDetector)
+        wait(1)
+        repeat rs.heartbeat:Wait()
+            if game.players.LocalPlayer.character.Humanoid.Sit == false then
+            getRoot(STAND).CFrame = CFrame.new(-897, 22, -613)
+            wait(1)
+            getRoot(STAND).CFrame = CFrame.new(-897, 22, -612)
+            end
+        until game.players.LocalPlayer.character.Humanoid.Sit == true
+        getRoot(STAND).CFrame = CFrame.new(-897, 22, -613)
+        wait(2)
+        getRoot(STAND).CFrame = CFrame.new(-897, 22, -612)
+        wait(.1)
+       repeat rs.heartbeat:Wait()
+            if getHumanoid(TARGET).Sit == false then
+                getRoot(STAND).CFrame = getRoot(TARGET).CFrameCFrame.new(0,0,4)
+                Wheel(getRoot(TARGET).CFrameCFrame.new(0,0,3))
+                Wheel(getRoot(TARGET).CFrameCFrame.new(0,0,3))
+                Wheel(getRoot(TARGET).CFrameCFrame.new(0,0,3))
+                Wheel(getRoot(TARGET).CFrameCFrame.new(0,0,3))
+            end
+        until getHumanoid(TARGET).Sit == true
+        getRoot(STAND).CFrame = getRoot(OWNER).CFrameCFrame.new(0,5,0)
+        Wheel(getRoot(OWNER).CFrameCFrame.new(0,7,0))
+        Wheel(getRoot(OWNER).CFrameCFrame.new(0,7,0))
+        Wheel(getRoot(OWNER).CFrameCFrame.new(0,7,0))
+        Wheel(getRoot(OWNER).CFrameCFrame.new(0,7,0))
     end
 end)
 
