@@ -1470,7 +1470,6 @@ CreateTargetAbility("car!",function()
             fireclickdetector(workspace.Ignored.Shop["[FoodsCart] - $16"].ClickDetector)
         until workspace.OldVehicles:FindFirstChild(STAND.Name.."BIKE")
         Chat("Debug: Sitting alt")
-        
         game.Players.LocalPlayer.Character.HumanoidRootPart.Position = workspace.OldVehicles[game.Players.LocalPlayer.Name.."BIKE"].VehicleSeat.Position+Vector3.new(0,0,-1.2)
         STAND.Backpack:FindFirstChild("Wallet")
         wait(1)
