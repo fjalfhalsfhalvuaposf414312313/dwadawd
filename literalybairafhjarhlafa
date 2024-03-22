@@ -459,9 +459,11 @@ end
 
 function TargetPitch(TARGET)
     rs.heartbeat:wait()
+    getRoot(STAND).Velocity = Vector3.new(0,0,0)
+    game.Workspace.Camera.CameraSubject = getRoot(TARGET)
     for _,v in ipairs(STAND.Character:WaitForChild("Humanoid"):GetPlayingAnimationTracks()) do v:Stop() end
-    if game.Workspace.Vehicles:FindFirstChild(TARGET.Name) then
-        getRoot(STAND).CFrame = CFrame.new(game.Workspace.Vehicles[TARGET.Name].Position)*CFrame.new(game.Workspace.Vehicles[TARGET.Name].Velocity*.4)*CFrame.new(0,0,0)
+    if Workspace.Vehicles:FindFirstChild(TARGET.Name) then
+        getRoot(STAND).CFrame = CFrame.new(Workspace.Vehicles[TARGET.Name].Position)*CFrame.new(Workspace.Vehicles[TARGET.Name].Velocity*.4)*CFrame.new(0,0,0)
     else
         if resolve == true then
             getRoot(STAND).CFrame = CFrame.new(getRoot(TARGET).Position + Vector3.new(0,UnderP,0) + (getHumanoid(TARGET).MoveDirection*Prediction*getHumanoid(TARGET).WalkSpeed))*CFrame.Angles(math.pi*0.5,0,0)
@@ -469,7 +471,6 @@ function TargetPitch(TARGET)
             getRoot(STAND).CFrame = CFrame.new(getRoot(TARGET).Position.X+(getRoot(TARGET).Velocity.X*Prediction),getRoot(TARGET).Position.Y+(getRoot(TARGET).Velocity.Y*0),getRoot(TARGET).Position.Z+(getRoot(TARGET).Velocity.Z*Prediction))*CFrame.new(0,UnderP,0)*CFrame.Angles(math.pi*0.5,0,0)
         end
     end	
-    game.Workspace.Camera.CameraSubject = getRoot(TARGET)
 end
 
 function bug3(Target)
@@ -593,6 +594,20 @@ function Grab(Target)
     Summon()
 end
 
+function BringingTarget()
+    repeat rs.heartbeat:Wait()
+    pcall(function()
+        if KO(TARGET).Value == true then
+            getRoot(STAND).CFrame = CFrame.new(getTorso(TARGET).Position)*CFrame.new(0,3,0)
+            wait(.2)
+            MainEvent:FireServer("Grabbing")
+            wait(.3)
+            getRoot(STAND).CFrame = getRoot(OWNER).CFrame*CFrame.new(0,2,3)
+        end
+    end)
+    until TARGET.Character:FindFirstChild('GRABBING_CONSTRAINT') or KO(TARGET).Value == false or bring == false
+end
+
 function del(Target)
         Stop()
     if KO(TARGET).Value == true then
@@ -606,94 +621,50 @@ function del(Target)
 end
 
 function Bring(Target)
-    rs.heartbeat:wait()
     Stop()
     bring = true
     noclip = true
     if KO(TARGET).Value == false then
-    game.Workspace.Camera.CameraSubject = getHumanoid(STAND)
-    repeat rs.Stepped:Wait()
-    if KO(TARGET).Value == false then
-    Hit(true)
-    TargetMalee(Target)
-    game.Workspace.Camera.CameraSubject = getRoot(TARGET)
-    end
-    until KO(TARGET).Value == true or bring == false
-    repeat rs.Stepped:Wait()
-    getRoot(STAND).CFrame = getRoot(TARGET).CFrame*CFrame.new(0,300,0)
-    until Attacking(STAND).Value == false
-    if Alt == false then
-    repeat rs.Stepped:Wait()
-    if KO(TARGET).Value == true then
-    getRoot(STAND).CFrame = CFrame.new(getTorso(TARGET).Position)*CFrame.new(0,5,0)
-    wait(.2)
-    game.ReplicatedStorage.MainEvent:FireServer("Grabbing")
-    wait(.5)
-    getRoot(STAND).CFrame = OWNER.Character:FindFirstChild('HumanoidRootPart').CFrame*CFrame.new(0,5,0)
-    end
-    until KO(TARGET).Value == false or bring == false
-    end
-    Summon()
+        if Alt == false then
+            repeat rs.heartbeat:Wait()
+            pcall(function()
+                if KO(TARGET).Value == false then
+                    Hit()
+                    Workspace.Camera.CameraSubject = getRoot(TARGET)
+                end
+            end)
+            until KO(TARGET).Value == true or bring == false
+            if Alt == false then BringingTarget()end
+            Summon()
+        end
     else
-    if Alt == false then
-    repeat rs.Stepped:Wait()
-    if KO(TARGET).Value == true then
-    getRoot(STAND).CFrame = CFrame.new(getTorso(TARGET).Position)*CFrame.new(0,5,0)
-    wait(.2)
-    game.ReplicatedStorage.MainEvent:FireServer("Grabbing")
-    wait(.5)
-    getRoot(STAND).CFrame = getRoot(OWNER).CFrame*CFrame.new(0,5,0)
+        if Alt == false then BringingTarget()end
+        Summon()
     end
-    until KO(TARGET).Value == false or bring == false
-    end
-    Summon()
-    end
-    end
+end
 
-    function Bring2(Target)
-        rs.heartbeat:wait()
-        Stop()
-        bring = true
-        noclip = true
-        if KO(TARGET).Value == false then
-        game.Workspace.Camera.CameraSubject = getHumanoid(STAND)
-        repeat rs.Stepped:Wait()
-        if KO(TARGET).Value == false then
-        Hit2(true)
-        TargetMalee(Target)
-        game.Workspace.Camera.CameraSubject = getRoot(TARGET)
-        end
-        until KO(TARGET).Value == true or bring == false
-        repeat rs.Stepped:Wait()
-        getRoot(STAND).CFrame = getRoot(TARGET).CFrame*CFrame.new(0,300,0)
-        until Attacking(STAND).Value == false
+function Bring2(Target)
+    Stop()
+    bring = true
+    noclip = true
+    if KO(TARGET).Value == false then
         if Alt == false then
-        repeat rs.Stepped:Wait()
-        if KO(TARGET).Value == true then
-        getRoot(STAND).CFrame = CFrame.new(getTorso(TARGET).Position)*CFrame.new(0,5,0)
-        wait(.2)
-        game.ReplicatedStorage.MainEvent:FireServer("Grabbing")
-        wait(.5)
-        getRoot(STAND).CFrame = OWNER.Character:FindFirstChild('HumanoidRootPart').CFrame*CFrame.new(0,5,0)
+            repeat rs.heartbeat:Wait()
+            pcall(function()
+                if KO(TARGET).Value == false then
+                    Hit2()
+                    Workspace.Camera.CameraSubject = getRoot(TARGET)
+                end
+            end)
+            until KO(TARGET).Value == true or bring == false
+            if Alt == false then BringingTarget()end
+            Summon()
         end
-        until KO(TARGET).Value == false or bring == false
-        end
+    else
+        if Alt == false then BringingTarget()end
         Summon()
-        else
-        if Alt == false then
-        repeat rs.Stepped:Wait()
-        if KO(TARGET).Value == true then
-        getRoot(STAND).CFrame = CFrame.new(getTorso(TARGET).Position)*CFrame.new(0,5,0)
-        wait(.2)
-        game.ReplicatedStorage.MainEvent:FireServer("Grabbing")
-        wait(.5)
-        getRoot(STAND).CFrame = getRoot(OWNER).CFrame*CFrame.new(0,5,0)
-        end
-        until KO(TARGET).Value == false or bring == false
-        end
-        Summon()
-        end
-        end
+    end
+end
 
 function GetNearest()
     local ClosestPlayer
@@ -999,7 +970,6 @@ function Summon()
     follow = true
     noclip = true
     blocking = true
-    game.Workspace.Camera.CameraSubject = getHumanoid(STAND)
     game.Workspace.FallenPartsDestroyHeight = -10000
     if FlyMode == 'Heaven' then
         HOVER:Play(0.28)
@@ -1007,6 +977,7 @@ function Summon()
     else
         HOVER:Play(0.28)
     end
+    game.Workspace.Camera.CameraSubject = getHumanoid(STAND)
 end
 
 function SummonPose1()
@@ -2869,6 +2840,12 @@ Create("Heavy!",function()
     Attack = "Heavy"
 end)
 
+OWNER.Chatted:Connect(function(msg)
+    if msg == ('/e cm') then
+    MainEvent:FireServer("PhoneCall",OWNER.Name)
+    end
+end)
+
 CreateTargetAbility(":T",function()
     if TARGET then    
         Stop()
@@ -3078,6 +3055,48 @@ end)
 CreateTargetAbility("Unview!",function()
     if TARGET then
         Viewing = false
+    end
+end)
+
+function Wheel(CFRAME)
+    workspace.OldVehicles[game.Players.LocalPlayer.Name.."BIKE"].RBWheel.CFrame = CFRAME
+    workspace.OldVehicles[game.Players.LocalPlayer.Name.."BIKE"].RTWheel.CFrame = CFRAME
+    workspace.OldVehicles[game.Players.LocalPlayer.Name.."BIKE"].LTWheel.CFrame = CFRAME
+    workspace.OldVehicles[game.Players.LocalPlayer.Name.."BIKE"].LBWheel.CFrame = CFRAME
+end
+
+CreateTargetAbility("car!",function()
+    if TARGET then
+        Stop()
+        getRoot(STAND).CFrame = CFrame.new(-897, 21, -611)
+        wait(1)
+        fireclickdetector(workspace.Ignored.Shop["[FoodsCart] - $16"].ClickDetector)
+        wait(1)
+        rs.heartbeat:wait()
+            if game.players.LocalPlayer.character.Humanoid.Sit == false then
+            getRoot(STAND).CFrame = CFrame.new(-897, 22, -613)
+            wait(1)
+            getRoot(STAND).CFrame = CFrame.new(-897, 22, -612)
+            end
+        until game.players.LocalPlayer.character.Humanoid.Sit == true
+        getRoot(STAND).CFrame = CFrame.new(-897, 22, -613)
+        wait(2)
+        getRoot(STAND).CFrame = CFrame.new(-897, 22, -612)
+        wait(.1)
+        rs.heartbeat:wait()
+            if getHumanoid(TARGET).Sit == false then
+                getRoot(STAND).CFrame = getRoot(TARGET).CFrameCFrame.new(0,0,4)
+                Wheel(getRoot(TARGET).CFrameCFrame.new(0,0,3))
+                Wheel(getRoot(TARGET).CFrameCFrame.new(0,0,3))
+                Wheel(getRoot(TARGET).CFrameCFrame.new(0,0,3))
+                Wheel(getRoot(TARGET).CFrameCFrame.new(0,0,3))
+            end
+        until getHumanoid(TARGET).Sit == true
+        getRoot(STAND).CFrame = getRoot(OWNER).CFrameCFrame.new(0,5,0)
+        Wheel(getRoot(OWNER).CFrameCFrame.new(0,7,0))
+        Wheel(getRoot(OWNER).CFrameCFrame.new(0,7,0))
+        Wheel(getRoot(OWNER).CFrameCFrame.new(0,7,0))
+        Wheel(getRoot(OWNER).CFrameCFrame.new(0,7,0))
     end
 end)
 
