@@ -281,13 +281,6 @@ function GripPos(Y)
     STAND.Character:FindFirstChild("Humanoid"):EquipTool(LastObject)
 end
 
-function Wheel(CFRAME)
-    workspace.OldVehicles[game.Players.LocalPlayer.Name.."BIKE"].RBWheel.CFrame = CFRAME
-    workspace.OldVehicles[game.Players.LocalPlayer.Name.."BIKE"].RTWheel.CFrame = CFRAME
-    workspace.OldVehicles[game.Players.LocalPlayer.Name.."BIKE"].LTWheel.CFrame = CFRAME
-    workspace.OldVehicles[game.Players.LocalPlayer.Name.."BIKE"].LBWheel.CFrame = CFRAME
-end
-
 function Fire(Gun,Activate)
     if STAND.Backpack:FindFirstChild(Gun)then
         STAND.Backpack:FindFirstChild(Gun).Parent = STAND.Character 
