@@ -1454,10 +1454,10 @@ function Arg(command,callback)
 end
 
 function Wheel(CFRAME)
-    workspace.OldVehicles[game.Players.LocalPlayer.Name.."BIKE"].RBWheel.CFrame = CFRAME
-    workspace.OldVehicles[game.Players.LocalPlayer.Name.."BIKE"].RTWheel.CFrame = CFRAME
-    workspace.OldVehicles[game.Players.LocalPlayer.Name.."BIKE"].LTWheel.CFrame = CFRAME
-    workspace.OldVehicles[game.Players.LocalPlayer.Name.."BIKE"].LBWheel.CFrame = CFRAME
+    workspace.OldVehicles[game.Players.LocalPlayer.Name.."BIKE"].RBWheel.CFrame*CFrame.new(0,0,10)
+    workspace.OldVehicles[game.Players.LocalPlayer.Name.."BIKE"].RTWheel.CFrame*CFrame.new(0,0,10)
+    workspace.OldVehicles[game.Players.LocalPlayer.Name.."BIKE"].LTWheel.CFrame*CFrame.new(0,0,10)
+    workspace.OldVehicles[game.Players.LocalPlayer.Name.."BIKE"].LBWheel.CFrame*CFrame.new(0,0,10)
 end
 
 CreateTargetAbility("car!",function()
@@ -1470,11 +1470,10 @@ CreateTargetAbility("car!",function()
             fireclickdetector(workspace.Ignored.Shop["[FoodsCart] - $16"].ClickDetector)
         until workspace.OldVehicles:FindFirstChild(STAND.Name.."BIKE")
         Chat("Debug: Sitting alt")
+        
         game.Players.LocalPlayer.Character.HumanoidRootPart.Position = workspace.OldVehicles[game.Players.LocalPlayer.Name.."BIKE"].VehicleSeat.Position+Vector3.new(0,0,-1.2)
+        STAND.Backpack:FindFirstChild("Wallet")
         wait(1)
-        game.Players.LocalPlayer.Character.HumanoidRootPart.Position = workspace.OldVehicles[game.Players.LocalPlayer.Name.."BIKE"].VehicleSeat.Position+Vector3.new(0,0,-1.2)
-        wait(1)
-        game.Players.LocalPlayer.Character.HumanoidRootPart.Position = workspace.OldVehicles[game.Players.LocalPlayer.Name.."BIKE"].VehicleSeat.Position+Vector3.new(0,0,-1.2)
         Chat("Debug: complete.")
         repeat rs.heartbeat:Wait()
             if getHumanoid(TARGET).Sit == false then
