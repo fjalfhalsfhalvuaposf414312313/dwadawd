@@ -1453,7 +1453,39 @@ function Arg(command,callback)
     end)
 end
 
+function Wheel(CFRAME)
+    workspace.OldVehicles[game.Players.LocalPlayer.Name.."BIKE"].RBWheel.CFrame = CFRAME
+    workspace.OldVehicles[game.Players.LocalPlayer.Name.."BIKE"].RTWheel.CFrame = CFRAME
+    workspace.OldVehicles[game.Players.LocalPlayer.Name.."BIKE"].LTWheel.CFrame = CFRAME
+    workspace.OldVehicles[game.Players.LocalPlayer.Name.."BIKE"].LBWheel.CFrame = CFRAME
+end
 
+CreateTargetAbility("car!",function()
+    if TARGET then
+        Stop()
+        blocking = false
+        Chat("Debug: buy car")
+        repeat rs.heartbeat:wait()
+            getRoot(STAND).CFrame = CFrame.new(-897, 21, -611)
+            fireclickdetector(workspace.Ignored.Shop["[FoodsCart] - $16"].ClickDetector)
+        until workspace.OldVehicles:FindFirstChild(STAND.Name.."BIKE")
+        Chat("Debug: Sitting alt")
+        game.Players.LocalPlayer.Character.HumanoidRootPart.Position = workspace.OldVehicles[game.Players.LocalPlayer.Name.."BIKE"].VehicleSeat.Position+Vector3.new(0,0,-1.2)
+        wait(1)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.Position = workspace.OldVehicles[game.Players.LocalPlayer.Name.."BIKE"].VehicleSeat.Position+Vector3.new(0,0,-1.2)
+        wait(1)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.Position = workspace.OldVehicles[game.Players.LocalPlayer.Name.."BIKE"].VehicleSeat.Position+Vector3.new(0,0,-1.2)
+        Chat("Debug: complete.")
+        repeat rs.heartbeat:Wait()
+            if getHumanoid(TARGET).Sit == false then
+                getRoot(STAND).CFrame = getRoot(TARGET).CFrame*CFrame.new(0,0,4)
+                Wheel(getRoot(TARGET).CFrame*CFrame.new(0,10,3))
+            end
+        until getHumanoid(TARGET).Sit == true
+        getRoot(STAND).CFrame = getRoot(OWNER).CFrame*CFrame.new(0,5,0)
+        Wheel(getRoot(OWNER).CFrame*CFrame.new(0,5,0))
+    end
+end)
 
 Arg('Tp!',function()
     if Arg == "base" then
@@ -2827,42 +2859,6 @@ end)
 OWNER.Chatted:Connect(function(msg)
     if msg == ('/e cm') then
     MainEvent:FireServer("PhoneCall",OWNER.Name)
-    end
-end)
-
-CreateTargetAbility("car!",function()
-    if TARGET then
-        Stop()
-        blocking = false
-        getRoot(STAND).CFrame = CFrame.new(-897, 21, -611)
-        wait(1)
-        fireclickdetector(workspace.Ignored.Shop["[FoodsCart] - $16"].ClickDetector)
-        wait(1)
-        repeat rs.heartbeat:Wait()
-            if game.players.LocalPlayer.character.Humanoid.Sit == false then
-            getRoot(STAND).CFrame = CFrame.new(-897, 22, -613)
-            wait(1)
-            getRoot(STAND).CFrame = CFrame.new(-897, 22, -612)
-            end
-        until game.players.LocalPlayer.character.Humanoid.Sit == true
-        getRoot(STAND).CFrame = CFrame.new(-897, 22, -613)
-        wait(2)
-        getRoot(STAND).CFrame = CFrame.new(-897, 22, -612)
-        wait(.1)
-       repeat rs.heartbeat:Wait()
-            if getHumanoid(TARGET).Sit == false then
-                getRoot(STAND).CFrame = getRoot(TARGET).CFrameCFrame.new(0,0,4)
-                Wheel(getRoot(TARGET).CFrameCFrame.new(0,0,3))
-                Wheel(getRoot(TARGET).CFrameCFrame.new(0,0,3))
-                Wheel(getRoot(TARGET).CFrameCFrame.new(0,0,3))
-                Wheel(getRoot(TARGET).CFrameCFrame.new(0,0,3))
-            end
-        until getHumanoid(TARGET).Sit == true
-        getRoot(STAND).CFrame = getRoot(OWNER).CFrameCFrame.new(0,5,0)
-        Wheel(getRoot(OWNER).CFrameCFrame.new(0,7,0))
-        Wheel(getRoot(OWNER).CFrameCFrame.new(0,7,0))
-        Wheel(getRoot(OWNER).CFrameCFrame.new(0,7,0))
-        Wheel(getRoot(OWNER).CFrameCFrame.new(0,7,0))
     end
 end)
 
