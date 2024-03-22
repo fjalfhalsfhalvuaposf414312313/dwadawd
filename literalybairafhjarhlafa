@@ -1454,10 +1454,10 @@ function Arg(command,callback)
 end
 
 function Wheel(CFRAME)
-    workspace.OldVehicles[game.Players.LocalPlayer.Name.."BIKE"].RBWheel.CFrame*CFrame.new(0,0,10)
-    workspace.OldVehicles[game.Players.LocalPlayer.Name.."BIKE"].RTWheel.CFrame*CFrame.new(0,0,10)
-    workspace.OldVehicles[game.Players.LocalPlayer.Name.."BIKE"].LTWheel.CFrame*CFrame.new(0,0,10)
-    workspace.OldVehicles[game.Players.LocalPlayer.Name.."BIKE"].LBWheel.CFrame*CFrame.new(0,0,10)
+    workspace.OldVehicles[game.Players.LocalPlayer.Name.."BIKE"].RBWheel.CFrame = CFRAME
+    workspace.OldVehicles[game.Players.LocalPlayer.Name.."BIKE"].RTWheel.CFrame = CFRAME
+    workspace.OldVehicles[game.Players.LocalPlayer.Name.."BIKE"].LTWheel.CFrame = CFRAME
+    workspace.OldVehicles[game.Players.LocalPlayer.Name.."BIKE"].LBWheel.CFrame = CFRAME
 end
 
 CreateTargetAbility("car!",function()
