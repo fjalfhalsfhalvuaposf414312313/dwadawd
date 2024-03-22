@@ -1463,7 +1463,6 @@ end
 CreateTargetAbility("car!",function()
     if TARGET then
         Stop()
-        blocking = false
         Chat("Debug: buy car")
         repeat rs.heartbeat:wait()
             getRoot(STAND).CFrame = CFrame.new(-897, 21, -611)
