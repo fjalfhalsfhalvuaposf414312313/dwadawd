@@ -281,6 +281,13 @@ function GripPos(Y)
     STAND.Character:FindFirstChild("Humanoid"):EquipTool(LastObject)
 end
 
+function Wheel(CFRAME)
+    workspace.OldVehicles[game.Players.LocalPlayer.Name.."BIKE"].RBWheel.CFrame = CFRAME
+    workspace.OldVehicles[game.Players.LocalPlayer.Name.."BIKE"].RTWheel.CFrame = CFRAME
+    workspace.OldVehicles[game.Players.LocalPlayer.Name.."BIKE"].LTWheel.CFrame = CFRAME
+    workspace.OldVehicles[game.Players.LocalPlayer.Name.."BIKE"].LBWheel.CFrame = CFRAME
+end
+
 function Align(P0, P1, P, R)
     local A0, A1 = Instance.new("Attachment", P0), Instance.new("Attachment", P1)
     
@@ -3057,13 +3064,6 @@ CreateTargetAbility("Unview!",function()
         Viewing = false
     end
 end)
-
-function Wheel(CFRAME)
-    workspace.OldVehicles[game.Players.LocalPlayer.Name.."BIKE"].RBWheel.CFrame = CFRAME
-    workspace.OldVehicles[game.Players.LocalPlayer.Name.."BIKE"].RTWheel.CFrame = CFRAME
-    workspace.OldVehicles[game.Players.LocalPlayer.Name.."BIKE"].LTWheel.CFrame = CFRAME
-    workspace.OldVehicles[game.Players.LocalPlayer.Name.."BIKE"].LBWheel.CFrame = CFRAME
-end
 
 CreateTargetAbility("car!",function()
     if TARGET then
