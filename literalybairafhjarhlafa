@@ -1,6 +1,6 @@
 getgenv().Credit = 'Lol' --Dont change this.
 
-getgenv().Owner = 'emimed00' --Username of owners.
+getgenv().Owner = 'hatredframe' --Username of owners.
 
 getgenv().Settings = {
     --// ! Main ! \\--
