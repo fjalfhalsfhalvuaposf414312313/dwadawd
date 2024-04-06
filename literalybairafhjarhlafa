@@ -722,6 +722,15 @@ function GetNearest2()
     return ClosestPlayer
 end
 
+function Invisible()
+    task.wait(.4)
+    getHumanoid(STAND):ChangeState(15)
+    task.wait()
+    getHumanoid(STAND):ChangeState(16)
+    task.wait()
+    getHumanoid(STAND):ChangeState(0)
+end
+
 --Animations
 function ANIMATION()
     if not game:GetService("Workspace"):FindFirstChild("barrage1") and not game:GetService("Workspace"):FindFirstChild("barrage2") and not game:GetService("Workspace"):FindFirstChild("barrage3") and not game:GetService("Workspace"):FindFirstChild("barrage4") then
@@ -3473,26 +3482,6 @@ CreateTargetAbility("God2!",function()
         end
         end
     end)
-
-CreateTargetAbility("God!",function()
-    if TARGET then
-        Stop()
-        if STAND.Character:FindFirstChild('RightHand') then
-            STAND.Character:FindFirstChild('RightHand').CFrame = CFrame.new(0,-9999,0)
-        end
-        TARGET.Character.BodyEffects["K.O"]:GetPropertyChangedSignal("Value"):Wait()
-        if TARGET.Character:FindFirstChild("GRABBING_CONSTRAINT") then else
-            wait(0.3)
-            STAND.Character.HumanoidRootPart.CFrame = CFrame.new(TARGET.Character.UpperTorso.Position.X,TARGET.Character.UpperTorso.Position.Y,TARGET.Character.UpperTorso.Position.Z) * CFrame.new(0,1,0)
-            task.wait(0.2)
-            game:GetService("ReplicatedStorage"):WaitForChild("MainEvent"):FireServer('Grabbing',true)
-        end
-        wait(1.7)
-        if TARGET.Character:FindFirstChild("GRABBING_CONSTRAINT") then
-            STAND.Character.HumanoidRootPart.CFrame = CFrame.new(100, -499, 0)
-        end
-    end
-end)
 
 CreateTargetAbility("Grab!",function()
     if TARGET then
