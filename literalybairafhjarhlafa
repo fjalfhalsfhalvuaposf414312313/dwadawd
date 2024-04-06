@@ -88,34 +88,21 @@ if game:GetService("Players"):FindFirstChild(StandOwner) then
     getgenv().StandLoaded = true
 end
 
-grm = getrawmetatable(game)
-setreadonly(grm, false)
-old = grm.__namecall
-grm.__namecall = newcclosure(function(self, ...)
+assert(getrawmetatable)
+gmt = getrawmetatable(game)
+setreadonly(gmt, false)
+old = gmt.__namecall
+gmt.__namecall =
+newcclosure(
+function(self, ...)
     local args = {...}
-    if tostring(args[1]) == "TeleportDetect" then
-        return
-    elseif tostring(args[1]) == "CHECKER_1" then
-        return
-    elseif tostring(args[1]) == "CHECKER" then
-        return
-    elseif tostring(args[1]) == "GUI_CHECK" then
-        return
-    elseif tostring(args[1]) == "OneMoreTime" then
-        return
-    elseif tostring(args[1]) == "checkingSPEED" then
-        return
-    elseif tostring(args[1]) == "BANREMOTE" then
-        return
-    elseif tostring(args[1]) == "PERMAIDBAN" then
-        return
-    elseif tostring(args[1]) == "KICKREMOTE" then
-        return
-    elseif tostring(args[1]) == "BR_KICKPC" then
-        return
-    elseif tostring(args[1]) == "BR_KICKMOBILE" then
-        return
-    end
+        if tostring(self) == "RemoteFunction" then return end
+        if tostring(self) == "MainEvent" then
+            if tostring(args[1]) == "DropMoney" or tostring(args[1]) == "TimerDecrease" or tostring(args[1]) == "TeleportDetect" or tostring(args[1]) == "CHECKER_1" or tostring(args[1]) == "GUI_CHECK" or tostring(args[1]) == "OneMoreTime" or tostring(args[1]) == "checkingSPEED" or tostring(args[1]) == "BANREMOTE" or tostring(args[1]) == "PERMAIDBAN" or tostring(args[1]) == "KICKREMOTE" or tostring(args[1]) == "BR_KICKPC" or tostring(args[1]) == "BR_KICKMOBILE" or tostring(args[1]) == "Grabbing" or tostring(args[1]) == "Block" or tostring(args[1]) == "Stomp" or tostring(args[1]) == "JoinCrew" or tostring(args[1]) == "LeaveCrew" or tostring(args[1]) == "PhoneCall" or tostring(args[1]) == "Boombox" or tostring(args[1]) == "BoomboxStop" or tostring(args[1]) == "EnterPromoCode" or tostring(args[1]) == "PurchaseSkinCrate" or tostring(args[1]) == "TimerMoney" or tostring(args[1]) == "Reload" or tostring(args[1]) == "UpdateMousePos" or tostring(args[1]) == "FireworkText" or tostring(args[1]) == "ChargeButton" or tostring(args[1]) == "ResetNew"  then
+        else 
+            return
+        end 
+        end
     return old(self, ...)
 end)
 
