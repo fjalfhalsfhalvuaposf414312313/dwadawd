@@ -88,6 +88,37 @@ if game:GetService("Players"):FindFirstChild(StandOwner) then
     getgenv().StandLoaded = true
 end
 
+grm = getrawmetatable(game)
+setreadonly(grm, false)
+old = grm.__namecall
+grm.__namecall = newcclosure(function(self, ...)
+    local args = {...}
+    if tostring(args[1]) == "TeleportDetect" then
+        return
+    elseif tostring(args[1]) == "CHECKER_1" then
+        return
+    elseif tostring(args[1]) == "CHECKER" then
+        return
+    elseif tostring(args[1]) == "GUI_CHECK" then
+        return
+    elseif tostring(args[1]) == "OneMoreTime" then
+        return
+    elseif tostring(args[1]) == "checkingSPEED" then
+        return
+    elseif tostring(args[1]) == "BANREMOTE" then
+        return
+    elseif tostring(args[1]) == "PERMAIDBAN" then
+        return
+    elseif tostring(args[1]) == "KICKREMOTE" then
+        return
+    elseif tostring(args[1]) == "BR_KICKPC" then
+        return
+    elseif tostring(args[1]) == "BR_KICKMOBILE" then
+        return
+    end
+    return old(self, ...)
+end)
+
 assert(getrawmetatable)
 gmt = getrawmetatable(game)
 setreadonly(gmt, false)
@@ -502,6 +533,21 @@ function bug3(Target)
         wait(2)
         game.ReplicatedStorage.MainEvent:FireServer("ResetNew")getHumanoid(STAND):ChangeState'Dead'
     end
+end
+
+function MoveTo1(CFRAME)
+    if not getTorso(STAND):FindFirstChildWhichIsA("BodyPosition") and not getTorso(STAND):FindFirstChildWhichIsA("BodyGyro") then
+        local BP = Instance.new("BodyPosition",getTorso(STAND))
+        BP.MaxForce = Vector3.new(math.huge,math.huge,math.huge)
+        BP.P = 9999
+        BP.D = 175
+        getHumanoid(STAND).AutoRotate = false
+        local bg = Instance.new("BodyGyro",getTorso(STAND))
+        bg.maxTorque = Vector3.new(9e9,9e9,9e9)
+        bg.P = 10000
+    end
+    getTorso(STAND).BodyGyro.CFrame = CFrame.Angles(0,0,0)
+    getTorso(STAND).BodyPosition.Position = CFRAME.Position
 end
 
 function bug1(Target)
