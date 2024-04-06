@@ -1,6 +1,6 @@
 getgenv().Credit = 'Lol' --Dont change this.
 
-getgenv().Owner = 'hatredframe' --Username of owners.
+getgenv().Owner = 'emimed00' --Username of owners.
 
 getgenv().Settings = {
     --// ! Main ! \\--
@@ -2280,6 +2280,38 @@ Create("unblock2!",function()
     game.ReplicatedStorage.MainEvent:FireServer("JoinCrew",CrewID) 
 end)
 
+Create("god!",function()
+    Stop()
+    blocking = false
+    Bind = false
+    noclip = true
+    game.ReplicatedStorage.MainEvent:FireServer("LeaveCrew")
+    repeat rs.heartbeat:Wait()
+        getRoot(STAND).CFrame = getRoot(OWNER).CFrame*CFrame.new(0,0,-4.85)
+    until KO(STAND).Value == true
+    Invisible()
+    repeat rs.heartbeat:Wait() until STAND.Character:FindFirstChild('GRABBING_CONSTRAINT')
+    Invisible()
+    task.wait(.2)
+    noclip = false
+    getRoot(STAND).CFrame = CFrame.new(0,-497,100)
+    MoveTo1(CFrame.new(getTorso(OWNER).Position)*CFrame.new(0,10,0))
+    OWNER.Character.BodyEffects["K.O"]:GetPropertyChangedSignal("Value"):Wait()
+    repeat rs.heartbeat:Wait()
+        pcall(function()
+            if KO(OWNER).Value == true then
+                MoveTo1(CFrame.new(getTorso(OWNER).Position)*CFrame.new(0,6,0))
+                wait(.4)
+                game.ReplicatedStorage.MainEvent:FireServer("Grabbing")
+                wait(.4)
+                MoveTo1(CFrame.new(getTorso(OWNER).Position)*CFrame.new(0,6,0))
+            end
+        end)
+    until OWNER.Character:FindFirstChild('GRABBING_CONSTRAINT')
+    MoveTo1(CFrame.new(getTorso(OWNER).Position)*CFrame.new(0,100,0))
+    game.ReplicatedStorage.MainEvent:FireServer("ResetNew")    
+end)
+
 Create("Nuke!",function()
     Stop()
     noclip = true
@@ -3636,6 +3668,22 @@ CreateTargetAbility(":Arrest",function()
         end
     end
 end)
+
+Create("cashgun!",function()
+        OWNER.Character.ChildAdded:Connect(function(_)
+            if _.Name == '[Phone]' then task.wait(.01)
+                game.ReplicatedStorage.MainEvent:FireServer("PhoneCall",OWNER.Name)
+            end
+        end)
+        OWNER.CharacterAdded:connect(function()
+            OWNER.Character:WaitForChild("FULLY_LOADED_CHAR")
+            OWNER.Character.ChildAdded:Connect(function(_)
+                if _.Name == '[Phone]' then task.wait(.01)
+                    game.ReplicatedStorage.MainEvent:FireServer("PhoneCall",OWNER.Name)
+                end
+            end)
+        end)
+    end)
 
 Create("cashgun!",function()
     Stop()
